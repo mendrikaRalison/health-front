@@ -1,26 +1,287 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
+
+/* =============================================================================
+   MEDICAL PATIENT TRACKING SAAS - COLOR SYSTEM
+   
+   Primary: Teal (#0D9488) - Trust, calmness, professionalism, healthcare
+   Inspired by: Oscar Health, Zocdoc, Athenahealth, modern medical dashboards
+   
+   Color Philosophy:
+   - Teal primary conveys trust, healing, and clinical professionalism
+   - Warm neutrals for approachable, non-clinical feel in backgrounds
+   - Clear semantic colors for patient status and alerts
+   - WCAG AA compliant contrast ratios throughout
+   ============================================================================= */
 
 @theme inline {
+  /* Core Shadcn/ui tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Surface colors */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Brand colors */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  /* UI colors */
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  /* Semantic status colors */
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  /* Interactive states */
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Extended brand palette for gradients and variations */
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
+  --color-primary-950: var(--primary-950);
+
+  /* Chart colors - healthcare dashboard optimized */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Border radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+
+  /* ==========================================================================
+     BACKGROUND PALETTE - Light neutral surfaces
+     ========================================================================== */
+  --background: oklch(0.985 0.002 247); /* Slight cool tint, not pure white */
+  --foreground: oklch(0.205 0.015 255); /* Deep slate for text */
+
+  /* Card surfaces - elevated with subtle warmth */
+  --card: oklch(1 0 0); /* Pure white for cards */
+  --card-foreground: oklch(0.205 0.015 255);
+
+  /* Popover surfaces */
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.205 0.015 255);
+
+  /* ==========================================================================
+     PRIMARY BRAND COLOR - Teal (Trust, Healing, Professionalism)
+     Base: #0D9488 / oklch(0.585 0.12 180)
+     ========================================================================== */
+  --primary: oklch(0.585 0.12 180); /* Main teal - buttons, links, CTAs */
+  --primary-foreground: oklch(0.985 0.01 180); /* White with slight teal tint */
+
+  /* Primary scale for hover/focus/active states */
+  --primary-50: oklch(0.97 0.02 180); /* Lightest - subtle backgrounds */
+  --primary-100: oklch(0.935 0.04 180); /* Light - hover backgrounds */
+  --primary-200: oklch(0.88 0.065 180); /* Selected states */
+  --primary-300: oklch(0.79 0.09 180); /* Borders, dividers */
+  --primary-400: oklch(0.68 0.11 180); /* Hover on dark */
+  --primary-500: oklch(0.585 0.12 180); /* Base primary */
+  --primary-600: oklch(0.52 0.115 180); /* Hover state */
+  --primary-700: oklch(0.455 0.1 180); /* Active/pressed */
+  --primary-800: oklch(0.38 0.08 180); /* Dark variant */
+  --primary-900: oklch(0.32 0.065 180); /* Darkest */
+  --primary-950: oklch(0.22 0.045 180); /* Near black teal */
+
+  /* ==========================================================================
+     SECONDARY COLORS - Soft slate for secondary actions
+     ========================================================================== */
+  --secondary: oklch(0.965 0.005 250); /* Light slate background */
+  --secondary-foreground: oklch(0.28 0.02 255); /* Dark slate text */
+
+  /* ==========================================================================
+     MUTED & ACCENT - Subtle UI elements
+     ========================================================================== */
+  --muted: oklch(0.955 0.008 250); /* Muted backgrounds */
+  --muted-foreground: oklch(0.48 0.015 255); /* Placeholder, labels */
+
+  --accent: oklch(0.94 0.025 180); /* Teal-tinted accent */
+  --accent-foreground: oklch(0.28 0.04 180); /* Dark teal text */
+
+  /* ==========================================================================
+     SEMANTIC STATUS COLORS - Dashboard & Patient States
+     ========================================================================== */
+
+  /* Destructive/Error - Critical alerts, errors, urgent patient status */
+  --destructive: oklch(0.577 0.2 25); /* Red - errors, critical */
+  --destructive-foreground: oklch(0.985 0.015 25);
+
+  /* Success - Healthy states, completed actions, positive indicators */
+  --success: oklch(0.585 0.15 145); /* Green - healthy, success */
+  --success-foreground: oklch(0.985 0.02 145);
+
+  /* Warning - Alerts, attention needed, caution states */
+  --warning: oklch(0.75 0.15 75); /* Amber - warnings, attention */
+  --warning-foreground: oklch(0.25 0.04 75); /* Dark text for contrast */
+
+  /* Info - Neutral notifications, informational states */
+  --info: oklch(0.585 0.14 245); /* Blue - info, neutral alerts */
+  --info-foreground: oklch(0.985 0.02 245);
+
+  /* ==========================================================================
+     INTERACTIVE STATES - Borders, inputs, focus rings
+     ========================================================================== */
+  --border: oklch(0.905 0.01 250); /* Subtle border */
+  --input: oklch(0.905 0.01 250); /* Input borders */
+  --ring: oklch(0.585 0.12 180); /* Focus ring - matches primary */
+
+  /* ==========================================================================
+     CHART COLORS - Healthcare dashboard visualizations
+     Optimized for data viz with good differentiation
+     ========================================================================== */
+  --chart-1: oklch(0.585 0.12 180); /* Primary teal */
+  --chart-2: oklch(0.585 0.14 245); /* Info blue */
+  --chart-3: oklch(0.585 0.15 145); /* Success green */
+  --chart-4: oklch(0.75 0.15 75); /* Warning amber */
+  --chart-5: oklch(0.577 0.2 25); /* Destructive red */
+
+  /* ==========================================================================
+     SIDEBAR - Navigation panel
+     ========================================================================== */
+  --sidebar: oklch(0.98 0.005 250); /* Slightly off-white */
+  --sidebar-foreground: oklch(0.28 0.02 255);
+  --sidebar-primary: oklch(0.585 0.12 180); /* Teal for active items */
+  --sidebar-primary-foreground: oklch(0.985 0.01 180);
+  --sidebar-accent: oklch(0.94 0.025 180); /* Hover state */
+  --sidebar-accent-foreground: oklch(0.28 0.04 180);
+  --sidebar-border: oklch(0.905 0.01 250);
+  --sidebar-ring: oklch(0.585 0.12 180);
+}
+
+/* =============================================================================
+   DARK MODE - Professional medical dashboard dark theme
+   ============================================================================= */
+.dark {
+  /* Background - Deep slate with subtle blue undertone */
+  --background: oklch(0.145 0.015 255);
+  --foreground: oklch(0.965 0.005 250);
+
+  /* Card surfaces - Elevated dark */
+  --card: oklch(0.195 0.015 255);
+  --card-foreground: oklch(0.965 0.005 250);
+
+  /* Popover surfaces */
+  --popover: oklch(0.195 0.015 255);
+  --popover-foreground: oklch(0.965 0.005 250);
+
+  /* Primary - Brighter teal for dark mode visibility */
+  --primary: oklch(0.68 0.12 180);
+  --primary-foreground: oklch(0.145 0.02 180);
+
+  /* Primary scale - adjusted for dark mode */
+  --primary-50: oklch(0.22 0.045 180);
+  --primary-100: oklch(0.28 0.055 180);
+  --primary-200: oklch(0.35 0.07 180);
+  --primary-300: oklch(0.44 0.09 180);
+  --primary-400: oklch(0.54 0.105 180);
+  --primary-500: oklch(0.62 0.115 180);
+  --primary-600: oklch(0.68 0.12 180);
+  --primary-700: oklch(0.74 0.11 180);
+  --primary-800: oklch(0.82 0.085 180);
+  --primary-900: oklch(0.9 0.055 180);
+  --primary-950: oklch(0.96 0.025 180);
+
+  /* Secondary */
+  --secondary: oklch(0.24 0.015 255);
+  --secondary-foreground: oklch(0.965 0.005 250);
+
+  /* Muted & Accent */
+  --muted: oklch(0.24 0.015 255);
+  --muted-foreground: oklch(0.65 0.01 250);
+
+  --accent: oklch(0.28 0.035 180);
+  --accent-foreground: oklch(0.9 0.04 180);
+
+  /* Semantic - Adjusted for dark mode visibility */
+  --destructive: oklch(0.65 0.2 25);
+  --destructive-foreground: oklch(0.985 0.015 25);
+
+  --success: oklch(0.65 0.15 145);
+  --success-foreground: oklch(0.145 0.03 145);
+
+  --warning: oklch(0.78 0.14 75);
+  --warning-foreground: oklch(0.2 0.04 75);
+
+  --info: oklch(0.65 0.14 245);
+  --info-foreground: oklch(0.145 0.03 245);
+
+  /* Interactive states */
+  --border: oklch(0.28 0.015 255);
+  --input: oklch(0.28 0.015 255);
+  --ring: oklch(0.68 0.12 180);
+
+  /* Chart colors - brighter for dark mode */
+  --chart-1: oklch(0.68 0.12 180);
+  --chart-2: oklch(0.65 0.14 245);
+  --chart-3: oklch(0.65 0.15 145);
+  --chart-4: oklch(0.78 0.14 75);
+  --chart-5: oklch(0.65 0.2 25);
+
+  /* Sidebar */
+  --sidebar: oklch(0.175 0.015 255);
+  --sidebar-foreground: oklch(0.965 0.005 250);
+  --sidebar-primary: oklch(0.68 0.12 180);
+  --sidebar-primary-foreground: oklch(0.145 0.02 180);
+  --sidebar-accent: oklch(0.28 0.035 180);
+  --sidebar-accent-foreground: oklch(0.9 0.04 180);
+  --sidebar-border: oklch(0.28 0.015 255);
+  --sidebar-ring: oklch(0.68 0.12 180);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+  }
 }
