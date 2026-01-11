@@ -1,10 +1,19 @@
+"use client";
+
+import { useState } from "react";
+import { PatientList } from "@/components/patient-list";
+import { mockPatients } from "@/lib/mock-patients";
+
 export default function PatientPage() {
+  const [selectedPatientId, setSelectedPatientId] = useState<string>();
+
   return (
-    <div className="mx-auto w-full max-w-5xl">
-      <h1 className="text-2xl font-semibold">Patient</h1>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Patient section placeholder.
-      </p>
+    <div className="mx-auto w-full max-w-6xl">
+      <PatientList
+        patients={mockPatients}
+        selectedPatientId={selectedPatientId}
+        onPatientSelect={setSelectedPatientId}
+      />
     </div>
   );
 }

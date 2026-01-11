@@ -4,35 +4,19 @@ import { useState } from "react";
 import { Menu } from "lucide-react";
 
 import { Sidebar } from "@/components/sidebar";
+import { useSidebar } from "@/contexts/sidebar-context";
 import { cn } from "@/lib/utils";
 
 type AppShellProps = {
   children: React.ReactNode;
 };
 
-const STORAGE_KEY = "health-front.sidebar.collapsed";
-
 export function AppShell({ children }: AppShellProps) {
-  const [collapsed, setCollapsed] = useState(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      return raw === "1";
-    } catch {
-      return false;
-    }
-  });
+  const { collapsed, setCollapsed } = useSidebar();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const toggleCollapsed = () => {
-    setCollapsed((prev) => {
-      const next = !prev;
-      try {
-        window.localStorage.setItem(STORAGE_KEY, next ? "1" : "0");
-      } catch {
-        // ignore
-      }
-      return next;
-    });
+    setCollapsed(!collapsed);
   };
 
   return (
